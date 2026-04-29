@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Service | ClickLogic Studio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Specific Styles for the Booking Form */
+        .form-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: radial-gradient(circle at center, #422057 0%, #031B1B 100%);
+        }
+
+        .form-box {
+            width: 100%;
+            max-width: 500px;
+            background: #0b1f1f;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(70, 207, 176, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .form-box h2 {
+            font-family: 'Fraunces', serif;
+            color: #FFD662; /* Lime Yellow from your reference */
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #46CFB0; /* Fine Turquoise */
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            background: #031B1B;
+            border: 1px solid #334155;
+            color: #fff;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #46CFB0;
+        }
+
+        .step { display: none; }
+        .step.active { 
+            display: block; 
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: #46CFB0;
+            color: #031B1B;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-submit:hover {
+            background: #FFD662;
+            transform: scale(1.02);
+        }
+
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <div class="form-box">
+        <h2>Book Your Request</h2>
+        
+        <form action="https://www.formbackend.com/f/1ac1119e405b278a" method="POST">
+            
+            <div id="step1" class="step active">
+                <label>Full Name</label>
+                <input type="text" name="name" placeholder="Enter your name" required>
+                
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="example@logic.com" required>
+                
+                <label>Select Service</label>
+                <select name="service" required>
+                    <option value="PPT Creation">PPT Creation</option>
+                    <option value="YouTube Thumbnails">YouTube Thumbnails</option>
+                    <option value="Cinematic Portraits">Cinematic Portraits</option>
+                    <option value="Video Editing">Video Editing</option>
+                    <option value="Website Creation">Website Creation</option>
+                    <option value="Logo Design">Logo Design</option>
+                </select>
+
+                <label>Preferred Communication</label>
+                <select id="commMethod" name="method">
+                    <option value="Instagram">Instagram</option>
+                    <option value="Discord">Discord</option>
+                    <option value="Messenger">Messenger</option>
+                    <option value="Email">Email</option>
+                </select>
+
+                <button type="button" class="btn-submit" onclick="nextStep()">Continue →</button>
+            </div>
+
+            <div id="step2" class="step">
+                <label id="dynamicLabel">Your Detail</label>
+                <input type="text" name="userid" placeholder="Enter your handle/ID..." required>
+                
+                <label>Project Brief (Optional)</label>
+                <input type="text" name="brief" placeholder="Tell us about your project...">
+                
+                <button type="submit" class="btn-submit">Submit Request</button>
+                <a href="#" onclick="prevStep()" class="back-home" style="cursor:pointer">← Go Back</a>
+            </div>
+        </form>
+        
+        <a href="index.html" class="back-home">Return to Homepage</a>
+    </div>
+</div>
+
+<script>
+    function nextStep() {
+        const method = document.getElementById("commMethod").value;
+        document.getElementById("dynamicLabel").innerText = "Your " + method + " ID/Handle";
+        document.getElementById("step1").classList.remove("active");
+        document.getElementById("step2").classList.add("active");
+    }
+
+    function prevStep() {
+        document.getElementById("step2").classList.remove("active");
+        document.getElementById("step1").classList.add("active");
+    }
+</script>
+
+</body>
+</html>
